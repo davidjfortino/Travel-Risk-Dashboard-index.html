@@ -3,133 +3,18 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Random Joke Generator</title>
+  <title>Page removed</title>
   <style>
-    :root { --bg:#0f1724; --card:#0b1220; --accent:#7c3aed; --muted:#9aa4b2; color-scheme: dark; }
-    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,#071029 0%,#07162a 100%);color:#e6eef8}
-    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:28px;border-radius:12px;max-width:720px;width:94%;box-shadow:0 6px 30px rgba(2,6,23,0.6);border:1px solid rgba(255,255,255,0.03)}
-    h1{margin:0 0 12px;font-size:20px}
-    #joke{min-height:72px;font-size:18px;line-height:1.4;margin:14px 0;padding:12px;border-radius:8px;background:#061022;border:1px solid rgba(255,255,255,0.02)}
-    .meta{color:var(--muted);font-size:13px;margin-bottom:8px}
-    .controls{display:flex;gap:8px;flex-wrap:wrap}
-    button{background:var(--accent);color:white;padding:10px 14px;border-radius:8px;border:0;cursor:pointer;font-weight:600}
-    button.secondary{background:#0b1a2b;border:1px solid rgba(255,255,255,0.04);color:var(--muted)}
-    button:disabled{opacity:0.6;cursor:default}
-    .small{font-size:13px;padding:8px 10px}
-    footer{margin-top:12px;color:var(--muted);font-size:13px}
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;background:#fff;color:#111}
+    .card{padding:28px;border-radius:8px;border:1px solid #eee;box-shadow:0 6px 18px rgba(0,0,0,0.04);max-width:640px;text-align:center}
+    h1{margin:0 0 8px}
+    p{margin:0;color:#666}
   </style>
 </head>
 <body>
-  <main class="card" role="main">
-    <h1>Random Joke Generator</h1>
-    <div class="meta">Sourced from <a href="https://v2.jokeapi.dev" target="_blank" rel="noreferrer" style="color:var(--accent)">JokeAPI</a>. Click "Get a joke!"</div>
-
-    <div id="joke" aria-live="polite">Press the button to get a joke.</div>
-
-    <div class="controls" style="margin-top:8px">
-      <button id="get" class="small">Get a joke!</button>
-      <button id="filterBtn" class="secondary small">Toggle safe mode: ON</button>
-      <button id="copy" class="secondary small">Copy</button>
-      <button id="speak" class="secondary small">Speak</button>
-    </div>
-
-    <footer>
-      Tip: If you see an error, check your network. The API supports CORS from browsers.
-    </footer>
-  </main>
-
-  <script>
-    const jokeEl = document.getElementById('joke');
-    const getBtn = document.getElementById('get');
-    const copyBtn = document.getElementById('copy');
-    const speakBtn = document.getElementById('speak');
-    const filterBtn = document.getElementById('filterBtn');
-
-    let safeMode = true; // blacklist flags
-    function apiUrl() {
-      // Use JokeAPI; blacklist common adult flags when safeMode on
-      const blacklist = safeMode ? 'nsfw,religious,political,racist,sexist,explicit' : '';
-      // Request either single-line or two-part
-      return 'https://v2.jokeapi.dev/joke/Any?type=single,twopart' + (blacklist ? '&blacklistFlags=' + blacklist : '');
-    }
-
-    async function fetchJoke() {
-      setLoading(true);
-      try {
-        const res = await fetch(apiUrl());
-        if (!res.ok) throw new Error('Network response not OK: ' + res.status);
-        const data = await res.json();
-        displayJoke(data);
-      } catch (err) {
-        jokeEl.textContent = 'Error fetching a joke: ' + err.message;
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    function displayJoke(data) {
-      if (!data) {
-        jokeEl.textContent = 'No joke received.';
-        return;
-      }
-      if (data.type === 'single') {
-        jokeEl.innerHTML = escapeHtml(data.joke);
-      } else if (data.type === 'twopart') {
-        jokeEl.innerHTML = '<strong>' + escapeHtml(data.setup) + '</strong><br><br>' + escapeHtml(data.delivery);
-      } else {
-        jokeEl.textContent = 'Unexpected joke format.';
-      }
-    }
-
-    function setLoading(isLoading) {
-      getBtn.disabled = isLoading;
-      getBtn.textContent = isLoading ? 'Loading…' : 'Get a joke!';
-    }
-
-    function escapeHtml(unsafe) {
-      return unsafe
-        .replaceAll('&', '&amp;')
-        .replaceAll('<', '&lt;')
-        .replaceAll('>', '&gt;')
-        .replaceAll('"', '&quot;')
-        .replaceAll("'", '&#039;');
-    }
-
-    copyBtn.addEventListener('click', async () => {
-      const text = jokeEl.innerText.trim();
-      if (!text) return;
-      try {
-        await navigator.clipboard.writeText(text);
-        copyBtn.textContent = 'Copied!';
-        setTimeout(()=> (copyBtn.textContent = 'Copy'), 1400);
-      } catch {
-        copyBtn.textContent = 'Copy failed';
-        setTimeout(()=> (copyBtn.textContent = 'Copy'), 1400);
-      }
-    });
-
-    speakBtn.addEventListener('click', () => {
-      const text = jokeEl.innerText.trim();
-      if (!text) return;
-      if (!('speechSynthesis' in window)) {
-        alert('Speech synthesis not supported in this browser.');
-        return;
-      }
-      speechSynthesis.cancel();
-      const utter = new SpeechSynthesisUtterance(text);
-      utter.rate = 1;
-      speechSynthesis.speak(utter);
-    });
-
-    getBtn.addEventListener('click', fetchJoke);
-
-    filterBtn.addEventListener('click', () => {
-      safeMode = !safeMode;
-      filterBtn.textContent = 'Toggle safe mode: ' + (safeMode ? 'ON' : 'OFF');
-    });
-
-    // Optionally fetch a joke on load
-    // fetchJoke();
-  </script>
+  <div class="card">
+    <h1>Page removed</h1>
+    <p>This tools page has been removed. If you need the joke generator back, tell me and I will restore it or move it to a private path.</p>
+  </div>
 </body>
 </html>
