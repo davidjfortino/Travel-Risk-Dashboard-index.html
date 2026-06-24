@@ -967,7 +967,7 @@ header{background:var(--panel);border-bottom:1px solid var(--border);padding:9px
   <div class="kpi-pop-hdr"><span>🔍 What each layer is sourced from</span><span onclick="document.getElementById('lens-info-pop').classList.remove('open')" style="cursor:pointer;color:var(--t3)">✕</span></div>
   <div class="lsrc-h">Government advisory levels</div>
   <div class="lsrc-row"><span>🇺🇸 <b>US</b></span><span class="s">US State Department travel advisories</span></div>
-  <div class="lsrc-row"><span>🇬🇧 <b>UK</b></span><span class="s">UK FCDO — consensus-estimated (no numeric index)</span></div>
+  <div class="lsrc-row"><span>🇬🇧 <b>UK</b></span><span class="s">FCDO foreign travel advice, gov.uk</span></div>
   <div class="lsrc-row"><span>🇦🇺 <b>Australia</b></span><span class="s">DFAT Smartraveller</span></div>
   <div class="lsrc-row"><span>🇨🇦 <b>Canada</b></span><span class="s">Global Affairs Canada</span></div>
   <div class="lsrc-h">Risk lenses</div>
@@ -1098,7 +1098,7 @@ const CD = [
   ['Austria','AT',40,1,1,1,1,'Vienna','Europe','🇦🇹'],
   ['Azerbaijan','AZ',31,3,2,2,2,'Baku','Asia','🇦🇿'],
   ['Bahamas','BS',44,2,1,2,2,'Nassau','Caribbean','🇧🇸'],
-  ['Bahrain','BH',48,3,2,2,4,'Manama','Middle East','🇧🇭'],
+  ['Bahrain','BH',48,3,3,2,4,'Manama','Middle East','🇧🇭'],
   ['Bangladesh','BD',50,3,3,3,2,'Dhaka','Asia','🇧🇩'],
   ['Belarus','BY',112,4,4,4,4,'Minsk','Europe','🇧🇾'],
   ['Belgium','BE',56,2,1,1,2,'Brussels','Europe','🇧🇪'],
@@ -1156,7 +1156,7 @@ const CD = [
   ['Iran','IR',364,4,4,4,4,'Tehran','Middle East','🇮🇷'],
   ['Iraq','IQ',368,4,4,4,4,'Baghdad','Middle East','🇮🇶'],
   ['Ireland','IE',372,1,1,1,1,'Dublin','Europe','🇮🇪'],
-  ['Israel','IL',376,3,3,3,2,'Jerusalem','Middle East','🇮🇱'],
+  ['Israel','IL',376,3,2,3,2,'Jerusalem','Middle East','🇮🇱'],
   ['Italy','IT',380,2,1,1,2,'Rome','Europe','🇮🇹'],
   ['Ivory Coast','CI',384,2,2,2,2,'Yamoussoukro','Africa','🇨🇮'],
   ['Jamaica','JM',388,2,2,2,2,'Kingston','Caribbean','🇯🇲'],
@@ -1165,11 +1165,11 @@ const CD = [
   ['Kazakhstan','KZ',398,1,1,1,1,'Astana','Asia','🇰🇿'],
   ['Kenya','KE',404,2,2,2,2,'Nairobi','Africa','🇰🇪'],
   ['Kosovo','XK',0,2,2,2,1,'Pristina','Europe','🇽🇰'],
-  ['Kuwait','KW',414,3,2,2,4,'Kuwait City','Middle East','🇰🇼'],
+  ['Kuwait','KW',414,3,3,2,4,'Kuwait City','Middle East','🇰🇼'],
   ['Kyrgyzstan','KG',417,1,2,2,2,'Bishkek','Asia','🇰🇬'],
   ['Laos','LA',418,2,2,1,2,'Vientiane','Asia','🇱🇦'],
   ['Latvia','LV',428,1,1,1,1,'Riga','Europe','🇱🇻'],
-  ['Lebanon','LB',422,4,4,3,4,'Beirut','Middle East','🇱🇧'],
+  ['Lebanon','LB',422,4,2,3,4,'Beirut','Middle East','🇱🇧'],
   ['Libya','LY',434,4,4,4,4,'Tripoli','Africa','🇱🇾'],
   ['Lithuania','LT',440,1,1,1,1,'Vilnius','Europe','🇱🇹'],
   ['Luxembourg','LU',442,1,1,1,1,'Luxembourg City','Europe','🇱🇺'],
@@ -1197,7 +1197,7 @@ const CD = [
   ['North Korea','KP',408,4,4,4,4,'Pyongyang','Asia','🇰🇵'],
   ['North Macedonia','MK',807,1,1,1,1,'Skopje','Europe','🇲🇰'],
   ['Norway','NO',578,1,1,1,1,'Oslo','Europe','🇳🇴'],
-  ['Oman','OM',512,3,2,2,3,'Muscat','Middle East','🇴🇲'],
+  ['Oman','OM',512,3,1,2,3,'Muscat','Middle East','🇴🇲'],
   ['Pakistan','PK',586,3,3,3,2,'Islamabad','Asia','🇵🇰'],
   ['Panama','PA',591,2,2,2,1,'Panama City','Central America','🇵🇦'],
   ['Papua New Guinea','PG',598,3,3,2,3,'Port Moresby','Oceania','🇵🇬'],
@@ -1206,7 +1206,7 @@ const CD = [
   ['Philippines','PH',608,2,2,2,2,'Manila','Asia','🇵🇭'],
   ['Poland','PL',616,1,1,1,1,'Warsaw','Europe','🇵🇱'],
   ['Portugal','PT',620,1,1,1,1,'Lisbon','Europe','🇵🇹'],
-  ['Qatar','QA',634,3,2,2,4,'Doha','Middle East','🇶🇦'],
+  ['Qatar','QA',634,3,3,2,4,'Doha','Middle East','🇶🇦'],
   ['Romania','RO',642,1,1,1,1,'Bucharest','Europe','🇷🇴'],
   ['Russia','RU',643,4,4,4,4,'Moscow','Europe','🇷🇺'],
   ['Rwanda','RW',646,3,1,1,1,'Kigali','Africa','🇷🇼'],
@@ -1238,7 +1238,7 @@ const CD = [
   ['Turkey','TR',792,2,2,2,2,'Ankara','Europe','🇹🇷'],
   ['Turkmenistan','TM',795,1,2,2,2,'Ashgabat','Asia','🇹🇲'],
   ['Uganda','UG',800,4,2,2,3,'Kampala','Africa','🇺🇬'],
-  ['Ukraine','UA',804,4,4,4,4,'Kyiv','Europe','🇺🇦'],
+  ['Ukraine','UA',804,4,2,4,4,'Kyiv','Europe','🇺🇦'],
   ['United Arab Emirates','AE',784,3,1,2,4,'Abu Dhabi','Middle East','🇦🇪'],
   ['United Kingdom','GB',826,2,0,2,2,'London','Europe','🇬🇧'],
   ['United States','US',840,0,1,1,1,'Washington D.C.','North America','🇺🇸'],
@@ -3311,7 +3311,7 @@ function exportTravelBrief(iso2) {
     </div>
   </div>
   <div class="footer"><span>Global Risk Intelligence · Confidential Travel Brief</span><span>${r[0]} · ${today}</span></div>
-  <footer id="provenance"><strong>Sources:</strong> US State Dept advisories &amp; threat indicators (travel.state.gov, pulled Jun 2026) · Australia DFAT Smartraveller (Jan 2026) · Canada GAC travel.gc.ca (Jun 2026) · UK FCDO: consensus-estimated, no numeric national index · City guidance: practitioner assessment, not a government source · Escalating: curated watchlist (Jun 2026). Always verify official government sources before travel.</footer>
+  <footer id="provenance"><strong>Sources:</strong> US State Dept advisories &amp; threat indicators (travel.state.gov, pulled Jun 2026) · Australia DFAT Smartraveller (Jan 2026) · Canada GAC travel.gc.ca (Jun 2026) · UK: FCDO foreign travel advice, gov.uk · City guidance: practitioner assessment, not a government source · Escalating: curated watchlist (Jun 2026). Always verify official government sources before travel.</footer>
 </body></html>`;
 
   const w = window.open('','_blank');
@@ -4123,6 +4123,6 @@ function showChangesModal() {
 // ─── INIT ─────────────────────────────────────────────────────────────────────
 initMap();
 </script>
-<footer id="provenance"><strong>Sources:</strong> US State Dept advisories &amp; threat indicators (travel.state.gov, pulled Jun 2026) · Australia DFAT Smartraveller (Jan 2026) · Canada GAC travel.gc.ca (Jun 2026) · UK FCDO: consensus-estimated, no numeric national index · City guidance: practitioner assessment, not a government source · Escalating: curated watchlist (Jun 2026). Always verify official government sources before travel.</footer>
+<footer id="provenance"><strong>Sources:</strong> US State Dept advisories &amp; threat indicators (travel.state.gov, pulled Jun 2026) · Australia DFAT Smartraveller (Jan 2026) · Canada GAC travel.gc.ca (Jun 2026) · UK: FCDO foreign travel advice, gov.uk · City guidance: practitioner assessment, not a government source · Escalating: curated watchlist (Jun 2026). Always verify official government sources before travel.</footer>
 </body>
 </html>
